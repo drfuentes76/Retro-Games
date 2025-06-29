@@ -1,0 +1,1 @@
+// Final emulator switcher logic is embedded here.
