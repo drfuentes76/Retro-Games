@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html>
-<head><title>Final Multi-Console Emulator</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Console Emulator</title>
+  <script src="js/engine-switcher.js" defer></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
   <h1>Multi-Console Emulator</h1>
-  <p>This version includes integrated engines for NES, SNES, GB, GBA, Genesis, and N64.</p>
-  <p>Full upload, ROM search, player name, voice chat controls, and console selector included.</p>
-  <p>This is a placeholder. Emulator scripts and engine logic are embedded in the final build.</p>
+
+  <label for="consoleSelect">Choose Console:</label>
+  <select id="consoleSelect">
+    <option value="nes">NES</option>
+    <option value="snes">SNES</option>
+    <option value="gb">Game Boy</option>
+    <option value="gba">GBA</option>
+    <option value="genesis">Genesis</option>
+    <option value="n64">N64</option>
+  </select>
+
+  <br><br>
+  <label for="romSearch">Search ROMs:</label>
+  <input type="text" id="romSearch" placeholder="Search ROMs..." />
+
+  <br><br>
+  <label for="romUpload">Upload ROMs:</label>
+  <input type="file" id="romUpload" multiple />
+
+  <br><br>
+  <label for="romList">Available ROMs:</label>
+  <select id="romList" size="10" style="width: 300px;"></select>
+
+  <br><br>
+  <label for="playerName">Player Name:</label>
+  <input type="text" id="playerName" placeholder="Enter your name" />
+
+  <br><br>
+  <label for="voiceControl">Voice Chat:</label>
+  <select id="voiceControl">
+    <option value="on">Voice Chat On</option>
+    <option value="mute">Mute</option>
+    <option value="unmute">Unmute</option>
+    <option value="off">Voice Chat Off</option>
+  </select>
+
+  <br><br>
+  <div id="emulatorContainer" style="border: 1px solid #ccc; width: 640px; height: 480px;"></div>
 </body>
 </html>
