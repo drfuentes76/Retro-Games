@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Multi-Console Emulator</title>
-  <script src="js/engine-switcher.js" defer></script>
-  <link rel="stylesheet" href="css/style.css">
+  <script src="engine-switcher.js" defer></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Multi-Console Emulator</h1>
 
-  <label for="consoleSelect">Choose Console:</label>
   <select id="consoleSelect">
     <option value="nes">NES</option>
     <option value="snes">SNES</option>
@@ -19,24 +18,12 @@
     <option value="n64">N64</option>
   </select>
 
-  <br><br>
-  <label for="romSearch">Search ROMs:</label>
-  <input type="text" id="romSearch" placeholder="Search ROMs..." />
-
-  <br><br>
-  <label for="romUpload">Upload ROMs:</label>
   <input type="file" id="romUpload" multiple />
-
-  <br><br>
-  <label for="romList">Available ROMs:</label>
+  <input type="text" id="romSearch" placeholder="Search ROMs" />
   <select id="romList" size="10" style="width: 300px;"></select>
 
   <br><br>
-  <label for="playerName">Player Name:</label>
   <input type="text" id="playerName" placeholder="Enter your name" />
-
-  <br><br>
-  <label for="voiceControl">Voice Chat:</label>
   <select id="voiceControl">
     <option value="on">Voice Chat On</option>
     <option value="mute">Mute</option>
@@ -45,6 +32,6 @@
   </select>
 
   <br><br>
-  <div id="emulatorContainer" style="border: 1px solid #ccc; width: 640px; height: 480px;"></div>
+  <div id="emulatorContainer" style="width: 640px; height: 480px; border: 1px solid #ccc;"></div>
 </body>
 </html>
