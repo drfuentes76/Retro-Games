@@ -1,1 +1,1 @@
-// Game Boy Emulator engine placeholder
+// Game Boy Emulator

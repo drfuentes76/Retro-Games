@@ -1,1 +1,1 @@
-// N64 Emulator engine placeholder
+// N64 Emulator

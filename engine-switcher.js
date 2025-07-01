@@ -1,1 +1,1 @@
-// Dynamic engine switcher logic loaded here
+// Logic to dynamically load emulators and start games

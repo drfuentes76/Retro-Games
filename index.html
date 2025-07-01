@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Multi-Console Emulator</title>
+  <title>Multi-Console Emulator (Multiplayer + Voice)</title>
   <script src="engine-switcher.js" defer></script>
+  <script src="multiplayer-sync.js" defer></script>
+  <script src="voice-chat.js" defer></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,9 +22,7 @@
 
   <input type="file" id="romUpload" multiple />
   <input type="text" id="romSearch" placeholder="Search ROMs" />
-  <select id="romList" size="10" style="width: 300px;"></select>
-
-  <br><br>
+  <select id="romList" size="10"></select>
   <input type="text" id="playerName" placeholder="Enter your name" />
   <select id="voiceControl">
     <option value="on">Voice Chat On</option>
@@ -31,7 +31,6 @@
     <option value="off">Voice Chat Off</option>
   </select>
 
-  <br><br>
   <div id="emulatorContainer" style="width: 640px; height: 480px; border: 1px solid #ccc;"></div>
 </body>
 </html>
