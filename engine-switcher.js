@@ -1,1 +1,1 @@
-// Logic to dynamically load emulators and start games
+// Load and start ROM in selected emulator

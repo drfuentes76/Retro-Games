@@ -1,1 +1,1 @@
-// WebRTC voice chat logic here
+// Voice chat system here

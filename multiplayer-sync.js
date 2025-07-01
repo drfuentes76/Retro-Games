@@ -1,1 +1,1 @@
-// Multiplayer WebRTC sync logic goes here
+// Multiplayer WebRTC sync logic here
