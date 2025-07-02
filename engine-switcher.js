@@ -1,1 +1,1 @@
-// Load and start ROM in selected emulator
+// Start game logic here

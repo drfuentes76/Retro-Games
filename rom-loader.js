@@ -1,1 +1,1 @@
-// Fetch ROMs from /roms and populate the ROM list
+// Load roms from /roms folder

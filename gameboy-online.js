@@ -1,1 +1,1 @@
-// Game Boy Emulator logic
+// Game Boy Emulator

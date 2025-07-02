@@ -1,1 +1,1 @@
-// N64 Emulator loader
+// N64 Emulator
