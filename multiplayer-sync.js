@@ -1,1 +1,1 @@
-// Multiplayer sync logic
+// Multiplayer placeholder script
