@@ -1,1 +1,53 @@
-<html><head><title>Emulator</title></head><body><h1>Emulator Hub</h1></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi-Console Emulator</title>
+  <script src="engine-switcher.js" defer></script>
+  <script src="rom-loader.js" defer></script>
+  <script src="multiplayer-sync.js" defer></script>
+  <script src="voice-chat.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Multi-Console Emulator</h1>
+
+  <label for="consoleSelect">Console:</label>
+  <select id="consoleSelect">
+    <option value="">-- Select Console --</option>
+    <option value="nes">NES</option>
+    <option value="snes">SNES</option>
+    <option value="gb">Game Boy</option>
+    <option value="gba">GBA</option>
+    <option value="genesis">Genesis</option>
+    <option value="n64">N64</option>
+  </select>
+
+  <br /><br />
+
+  <label for="romUpload">Upload ROMs:</label>
+  <input type="file" id="romUpload" multiple />
+  <input type="text" id="romSearch" placeholder="Search ROMs..." />
+
+  <br /><br />
+
+  <label for="romList">Available ROMs:</label>
+  <select id="romList" size="10" style="width: 300px;"></select>
+
+  <br /><br />
+  <button id="startGameBtn" disabled>Start Game</button>
+
+  <br /><br />
+  <input type="text" id="playerName" placeholder="Enter player name" />
+  <select id="voiceControl">
+    <option value="on">Voice Chat On</option>
+    <option value="mute">Mute</option>
+    <option value="unmute">Unmute</option>
+    <option value="off">Voice Chat Off</option>
+  </select>
+
+  <br /><br />
+  <div id="emulatorContainer" style="width:640px;height:480px;border:1px solid black;"></div>
+</body>
+</html>
