@@ -6,21 +6,15 @@ import { loadGBA } from './gba-loader.js';
 import { loadGenesis } from './genesis-loader.js';
 import { loadN64 } from './n64-loader.js';
 
-export function launchEmulator(consoleType, romBuffer, username) {
+export function launchEmulator(consoleType, romBuffer) {
   const container = document.getElementById('emulatorContainer');
   switch (consoleType) {
-    case 'nes':
-      loadNES(romBuffer, container); break;
-    case 'snes':
-      loadSNES(romBuffer, container); break;
-    case 'gb':
-      loadGB(romBuffer, container); break;
-    case 'gba':
-      loadGBA(romBuffer, container); break;
-    case 'genesis':
-      loadGenesis(romBuffer, container); break;
-    case 'n64':
-      loadN64(romBuffer, container); break;
+    case 'nes': return loadNES(romBuffer, container);
+    case 'snes': return loadSNES(romBuffer, container);
+    case 'gb': return loadGB(romBuffer, container);
+    case 'gba': return loadGBA(romBuffer, container);
+    case 'genesis': return loadGenesis(romBuffer, container);
+    case 'n64': return loadN64(romBuffer, container);
     default:
       container.innerHTML = '<p>⚠️ Unsupported console selected.</p>';
   }

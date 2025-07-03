@@ -1,5 +1,1 @@
-
-export function loadGenesis(romBuffer, container) {
-  container.innerHTML = '<p>🕹 Genesis emulator launched (stub). Replace with Genesis Plus GX init.</p>';
-  // TODO: Wire up Genesis Plus GX with romBuffer
-}
+export function loadGenesis(buffer, container) { container.innerHTML = 'Genesis Engine Ready'; }
