@@ -1,1 +1,58 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Emulator</title></head><body><h1>Multi-Console Emulator Runtime Bound</h1></body></html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi-Console Emulator</title>
+  <script src="engine-switcher.js" defer></script>
+  <script src="rom-loader.js" defer></script>
+  <script src="voice-chat.js" defer></script>
+  <script src="multiplayer-sync.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1><b>Multi-Console Emulator</b></h1>
+
+  <label for="playerName">Player Name:</label>
+  <input type="text" id="playerName" placeholder="Enter your name" />
+
+  <label for="consoleSelect">Select Console:</label>
+  <select id="consoleSelect">
+    <option value="">-- Choose Console --</option>
+    <option value="nes">NES</option>
+    <option value="snes">SNES</option>
+    <option value="gb">Game Boy</option>
+    <option value="gba">Game Boy Advance</option>
+    <option value="genesis">Genesis</option>
+    <option value="n64">Nintendo 64</option>
+  </select>
+
+  <br /><br />
+
+  <label for="romSearch">Search ROMs:</label>
+  <input type="text" id="romSearch" placeholder="Search..." />
+
+  <select id="romList">
+    <option value="">-- Select ROM --</option>
+  </select>
+
+  <br /><br />
+
+  <label for="romUpload">Upload ROM:</label>
+  <input type="file" id="romUpload" accept=".nes,.sfc,.gb,.gba,.gen,.n64" multiple />
+
+  <br /><br />
+
+  <button id="startGameBtn" disabled>Start Game</button>
+
+  <h2>Voice Chat Controls</h2>
+  <select id="voiceControl">
+    <option value="off">Voice Chat Off</option>
+    <option value="mute">Mute Microphone</option>
+    <option value="unmute">Unmute Microphone</option>
+    <option value="on">Voice Chat On</option>
+  </select>
+
+  <div id="emulatorContainer" style="margin-top: 30px;"></div>
+</body>
+</html>
