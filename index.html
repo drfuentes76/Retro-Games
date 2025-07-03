@@ -1,1 +1,26 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Emulator Hub</title><script type='module' src='engine-switcher.js'></script></head><body><div id='emulatorContainer'>Emulator Area</div></body></html>
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Emulator Hub</title><script type='module' src='engine-switcher.js'></script></head><body><div id='emulatorContainer'>Emulator Area</div><div>
+  <label>Player Name: <input type="text" id="playerName" /></label>
+  <label>Voice Chat:
+    <select id="voiceToggle">
+      <option value="off">Off</option>
+      <option value="on">On</option>
+      <option value="mute">Mute Mic</option>
+      <option value="unmute">Unmute Mic</option>
+    </select>
+  </label>
+  <button onclick="startMultiplayer()">Start Multiplayer</button>
+</div>
+<script type="module">
+  import { initMultiplayer } from './multiplayer.js';
+  import { toggleVoiceChat } from './voicechat.js';
+
+  function startMultiplayer() {
+    const name = document.getElementById('playerName').value;
+    initMultiplayer(name);
+  }
+
+  document.getElementById('voiceToggle').addEventListener('change', (e) => {
+    toggleVoiceChat(e.target.value);
+  });
+</script>
+</body></html>
