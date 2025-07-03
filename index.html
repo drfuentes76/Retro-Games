@@ -1,69 +1,74 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
   <title>Multi-Console Emulator</title>
   <style>
     body { font-family: sans-serif; padding: 2rem; }
     label, select, input { margin: 0.5rem 0; display: block; }
+    #gameContainer { margin-top: 2rem; }
   </style>
 </head>
 <body>
   <h1>Multi-Console Emulator</h1>
-
-  <label>Player Name:
-    <input type="text" id="playerName" placeholder="Enter your name" />
-  </label>
-
-  <label>Search ROMs:
-    <input type="text" id="searchBar" placeholder="Search..." />
-  </label>
-
-  <label>Upload ROM:
-    <input type="file" id="romUpload" multiple />
-  </label>
-
+  <label>Player Name: <input type="text" id="playerName" value="Player"></label>
+  <label>Search ROMs: <input type="text" id="romSearch" placeholder="Search..."></label>
+  <label>Upload ROM: <input type="file" id="romUpload" multiple></label>
   <label>Console:
     <select id="consoleSelect">
       <option value="nes">NES</option>
-      <option value="snes">SNES</option>
-      <option value="gb">Game Boy</option>
-      <option value="gba">GBA</option>
-      <option value="genesis">Genesis</option>
-      <option value="n64">Nintendo 64</option>
     </select>
   </label>
+  <button id="startGame" disabled>Start Game</button>
 
-  <button id="startButton" disabled>Start Game</button>
-
-  <h3>Voice Chat Controls</h3>
-  <select id="voiceControl">
+  <h2>Voice Chat Controls</h2>
+  <select id="voiceChat">
     <option>Voice Chat Off</option>
-    <option>Mute Microphone</option>
-    <option>Unmute Microphone</option>
+    <option>Mute Mic</option>
+    <option>Unmute Mic</option>
     <option>Voice Chat On</option>
   </select>
 
+  <div id="gameContainer"></div>
+
+  <script src="jsnes.min.js"></script>
   <script>
-    const ws = new WebSocket("wss://panoramic.glitch.me");
+    let romData = null;
 
-    ws.onopen = () => {
-      console.log("Connected to signaling server");
-    };
-
-    ws.onerror = (e) => {
-      console.error("WebSocket error:", e);
-    };
-
-    document.getElementById('romUpload').addEventListener('change', () => {
-      document.getElementById('startButton').disabled = false;
+    document.getElementById('romUpload').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          romData = new Uint8Array(reader.result);
+          document.getElementById('startGame').disabled = false;
+        };
+        reader.readAsArrayBuffer(file);
+      }
     });
 
-    document.getElementById('startButton').addEventListener('click', () => {
-      const player = document.getElementById('playerName').value || "Player";
-      const console = document.getElementById('consoleSelect').value;
-      alert(`Starting ${console.toUpperCase()} game as ${player}`);
+    document.getElementById('startGame').addEventListener('click', () => {
+      const playerName = document.getElementById('playerName').value;
+      const consoleType = document.getElementById('consoleSelect').value;
+
+      if (consoleType === "nes" && romData) {
+        const nes = new jsnes.NES({
+          onFrame: function(frameBuffer) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 256;
+            canvas.height = 240;
+            const context = canvas.getContext('2d');
+            const imageData = context.getImageData(0, 0, 256, 240);
+            for (let i = 0; i < frameBuffer.length; i++) {
+              imageData.data[i] = frameBuffer[i];
+            }
+            context.putImageData(imageData, 0, 0);
+            document.getElementById('gameContainer').innerHTML = '';
+            document.getElementById('gameContainer').appendChild(canvas);
+          }
+        });
+        nes.loadROM(romData);
+        nes.start();
+      }
     });
   </script>
 </body>
