@@ -1,72 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Multi-Console Emulator</title>
+  <title>Multi-Console Emulator (Fixed NES)</title>
   <style>
     body { font-family: sans-serif; padding: 2rem; }
-    label, select, input { margin: 0.5rem 0; display: block; }
-    #gameContainer { margin-top: 2rem; }
+    #gameContainer canvas { border: 1px solid black; display: block; margin-top: 1rem; }
   </style>
 </head>
 <body>
   <h1>Multi-Console Emulator</h1>
   <label>Player Name: <input type="text" id="playerName" value="Player"></label>
-  <label>Search ROMs: <input type="text" id="romSearch" placeholder="Search..."></label>
-  <label>Upload ROM: <input type="file" id="romUpload" multiple></label>
+  <label>Upload ROM: <input type="file" id="romUpload"></label>
   <label>Console:
     <select id="consoleSelect">
       <option value="nes">NES</option>
     </select>
   </label>
   <button id="startGame" disabled>Start Game</button>
-
-  <h2>Voice Chat Controls</h2>
-  <select id="voiceChat">
-    <option>Voice Chat Off</option>
-    <option>Mute Mic</option>
-    <option>Unmute Mic</option>
-    <option>Voice Chat On</option>
-  </select>
-
   <div id="gameContainer"></div>
 
   <script src="jsnes.min.js"></script>
   <script>
-    let romData = null;
+    let romBuffer = null;
+    let canvas, context, imageData;
+    let nes;
 
-    document.getElementById('romUpload').addEventListener('change', (event) => {
+    const romUpload = document.getElementById('romUpload');
+    const startButton = document.getElementById('startGame');
+
+    romUpload.addEventListener('change', (event) => {
       const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          romData = new Uint8Array(reader.result);
-          document.getElementById('startGame').disabled = false;
-        };
-        reader.readAsArrayBuffer(file);
-      }
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        romBuffer = new Uint8Array(e.target.result);
+        startButton.disabled = false;
+      };
+      reader.readAsArrayBuffer(file);
     });
 
-    document.getElementById('startGame').addEventListener('click', () => {
-      const playerName = document.getElementById('playerName').value;
-      const consoleType = document.getElementById('consoleSelect').value;
+    function createCanvas() {
+      canvas = document.createElement('canvas');
+      canvas.width = 256;
+      canvas.height = 240;
+      context = canvas.getContext('2d');
+      imageData = context.getImageData(0, 0, 256, 240);
+      document.getElementById('gameContainer').innerHTML = '';
+      document.getElementById('gameContainer').appendChild(canvas);
+    }
 
-      if (consoleType === "nes" && romData) {
-        const nes = new jsnes.NES({
+    startButton.addEventListener('click', () => {
+      const consoleType = document.getElementById('consoleSelect').value;
+      const playerName = document.getElementById('playerName').value;
+
+      if (consoleType === "nes" && romBuffer) {
+        createCanvas();
+
+        nes = new jsnes.NES({
           onFrame: function(frameBuffer) {
-            const canvas = document.createElement('canvas');
-            canvas.width = 256;
-            canvas.height = 240;
-            const context = canvas.getContext('2d');
-            const imageData = context.getImageData(0, 0, 256, 240);
             for (let i = 0; i < frameBuffer.length; i++) {
               imageData.data[i] = frameBuffer[i];
             }
             context.putImageData(imageData, 0, 0);
-            document.getElementById('gameContainer').innerHTML = '';
-            document.getElementById('gameContainer').appendChild(canvas);
-          }
+          },
+          onStatusUpdate: function() {}
         });
-        nes.loadROM(romData);
+
+        nes.loadROM(romBuffer);
         nes.start();
       }
     });
