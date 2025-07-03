@@ -15,7 +15,25 @@
       stopVoiceStream();
     }
   });
+
+  import { generateJoinCode, redirectToRoom } from './matchmaking.js';
+
+  function createRoom() {
+    const code = generateJoinCode();
+    alert('Room Code: ' + code + '\nLink: ' + window.location.origin + window.location.pathname + '?room=' + code);
+    redirectToRoom(code);
+  }
+
+  function joinRoom() {
+    const code = document.getElementById('roomInput').value.trim().toUpperCase();
+    if (code) redirectToRoom(code);
+  }
 </script></head><body><div id='emulatorContainer'>Emulator Area</div><div>
+  <h2>🎮 Multiplayer Matchmaking</h2>
+  <button onclick="createRoom()">Create Game</button>
+  <input type="text" id="roomInput" placeholder="Enter Join Code" />
+  <button onclick="joinRoom()">Join Game</button>
+
   <label>Player Name: <input type="text" id="playerName" /></label>
   <label>Voice Chat:
     <select id="voiceToggle">
@@ -56,5 +74,18 @@
       stopVoiceStream();
     }
   });
+
+  import { generateJoinCode, redirectToRoom } from './matchmaking.js';
+
+  function createRoom() {
+    const code = generateJoinCode();
+    alert('Room Code: ' + code + '\nLink: ' + window.location.origin + window.location.pathname + '?room=' + code);
+    redirectToRoom(code);
+  }
+
+  function joinRoom() {
+    const code = document.getElementById('roomInput').value.trim().toUpperCase();
+    if (code) redirectToRoom(code);
+  }
 </script>
 </body></html>
