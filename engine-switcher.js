@@ -1,2 +1,2 @@
 import { launchEmulator } from './launchEmulator.js';
-// Detect console and ROM file, then pass to launchEmulator(...)
+// Add trigger to load emulator on ROM selection

@@ -1,1 +1,1 @@
-export function loadGB(buffer, container) { container.innerHTML = 'GB Engine Ready'; }
+export function loadGB(buffer, container) { container.innerHTML = 'Game Boy Engine Ready'; }
