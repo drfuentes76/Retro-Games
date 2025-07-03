@@ -1,1 +1,1 @@
-// Voice chat control placeholder
+// Voice chat toggles

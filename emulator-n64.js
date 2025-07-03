@@ -1,1 +1,1 @@
-// N64 emulator (wired)
+// Mupen64Plus wired

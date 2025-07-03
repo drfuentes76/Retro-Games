@@ -1,1 +1,1 @@
-// JS to auto-populate ROMs from /roms/ folder
+// Auto-load ROMs into dropdown

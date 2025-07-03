@@ -1,1 +1,1 @@
-// Multiplayer sync placeholder
+// Multiplayer sync logic

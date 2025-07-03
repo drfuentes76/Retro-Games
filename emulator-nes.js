@@ -1,1 +1,1 @@
-// NES emulator (wired)
+// JSNES engine wired

@@ -1,1 +1,1 @@
-// SNES emulator (wired)
+// SNES9x wired

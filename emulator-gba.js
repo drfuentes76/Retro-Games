@@ -1,1 +1,1 @@
-// GBA emulator (wired)
+// GBA wired

@@ -1,1 +1,1 @@
-// Genesis emulator (wired)
+// Genesis wired

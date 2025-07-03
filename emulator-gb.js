@@ -1,1 +1,1 @@
-// Game Boy emulator (wired)
+// GB wired
