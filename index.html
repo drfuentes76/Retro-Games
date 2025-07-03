@@ -1,91 +1,70 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Emulator Hub</title><script type='module' src='engine-switcher.js'>
-  import { connectToSignalingServer, broadcastInput } from './signaling.js';
-  import { initVoiceStream, stopVoiceStream } from './voice-webrtc.js';
 
-  function startMultiplayer() {
-    const name = document.getElementById('playerName').value;
-    connectToSignalingServer(name);
-    initVoiceStream();
-  }
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Console Emulator</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    label, select, input { margin: 0.5rem 0; display: block; }
+  </style>
+</head>
+<body>
+  <h1>Multi-Console Emulator</h1>
 
-  document.getElementById('voiceToggle').addEventListener('change', (e) => {
-    if (e.target.value === 'on' || e.target.value === 'unmute') {
-      initVoiceStream();
-    } else {
-      stopVoiceStream();
-    }
-  });
+  <label>Player Name:
+    <input type="text" id="playerName" placeholder="Enter your name" />
+  </label>
 
-  import { generateJoinCode, redirectToRoom } from './matchmaking.js';
+  <label>Search ROMs:
+    <input type="text" id="searchBar" placeholder="Search..." />
+  </label>
 
-  function createRoom() {
-    const code = generateJoinCode();
-    alert('Room Code: ' + code + '\nLink: ' + window.location.origin + window.location.pathname + '?room=' + code);
-    redirectToRoom(code);
-  }
+  <label>Upload ROM:
+    <input type="file" id="romUpload" multiple />
+  </label>
 
-  function joinRoom() {
-    const code = document.getElementById('roomInput').value.trim().toUpperCase();
-    if (code) redirectToRoom(code);
-  }
-</script></head><body><div id='emulatorContainer'>Emulator Area</div><div>
-  <h2>🎮 Multiplayer Matchmaking</h2>
-  <button onclick="createRoom()">Create Game</button>
-  <input type="text" id="roomInput" placeholder="Enter Join Code" />
-  <button onclick="joinRoom()">Join Game</button>
-
-  <label>Player Name: <input type="text" id="playerName" /></label>
-  <label>Voice Chat:
-    <select id="voiceToggle">
-      <option value="off">Off</option>
-      <option value="on">On</option>
-      <option value="mute">Mute Mic</option>
-      <option value="unmute">Unmute Mic</option>
+  <label>Console:
+    <select id="consoleSelect">
+      <option value="nes">NES</option>
+      <option value="snes">SNES</option>
+      <option value="gb">Game Boy</option>
+      <option value="gba">GBA</option>
+      <option value="genesis">Genesis</option>
+      <option value="n64">Nintendo 64</option>
     </select>
   </label>
-  <button onclick="startMultiplayer()">Start Multiplayer</button>
-</div>
-<script type="module">
-  import { initMultiplayer } from './multiplayer.js';
-  import { toggleVoiceChat } from './voicechat.js';
 
-  function startMultiplayer() {
-    const name = document.getElementById('playerName').value;
-    initMultiplayer(name);
-  }
+  <button id="startButton" disabled>Start Game</button>
 
-  document.getElementById('voiceToggle').addEventListener('change', (e) => {
-    toggleVoiceChat(e.target.value);
-  });
+  <h3>Voice Chat Controls</h3>
+  <select id="voiceControl">
+    <option>Voice Chat Off</option>
+    <option>Mute Microphone</option>
+    <option>Unmute Microphone</option>
+    <option>Voice Chat On</option>
+  </select>
 
-  import { connectToSignalingServer, broadcastInput } from './signaling.js';
-  import { initVoiceStream, stopVoiceStream } from './voice-webrtc.js';
+  <script>
+    const ws = new WebSocket("wss://panoramic.glitch.me");
 
-  function startMultiplayer() {
-    const name = document.getElementById('playerName').value;
-    connectToSignalingServer(name);
-    initVoiceStream();
-  }
+    ws.onopen = () => {
+      console.log("Connected to signaling server");
+    };
 
-  document.getElementById('voiceToggle').addEventListener('change', (e) => {
-    if (e.target.value === 'on' || e.target.value === 'unmute') {
-      initVoiceStream();
-    } else {
-      stopVoiceStream();
-    }
-  });
+    ws.onerror = (e) => {
+      console.error("WebSocket error:", e);
+    };
 
-  import { generateJoinCode, redirectToRoom } from './matchmaking.js';
+    document.getElementById('romUpload').addEventListener('change', () => {
+      document.getElementById('startButton').disabled = false;
+    });
 
-  function createRoom() {
-    const code = generateJoinCode();
-    alert('Room Code: ' + code + '\nLink: ' + window.location.origin + window.location.pathname + '?room=' + code);
-    redirectToRoom(code);
-  }
-
-  function joinRoom() {
-    const code = document.getElementById('roomInput').value.trim().toUpperCase();
-    if (code) redirectToRoom(code);
-  }
-</script>
-</body></html>
+    document.getElementById('startButton').addEventListener('click', () => {
+      const player = document.getElementById('playerName').value || "Player";
+      const console = document.getElementById('consoleSelect').value;
+      alert(`Starting ${console.toUpperCase()} game as ${player}`);
+    });
+  </script>
+</body>
+</html>
