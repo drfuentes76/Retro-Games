@@ -1,4 +1,21 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Emulator Hub</title><script type='module' src='engine-switcher.js'></script></head><body><div id='emulatorContainer'>Emulator Area</div><div>
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Emulator Hub</title><script type='module' src='engine-switcher.js'>
+  import { connectToSignalingServer, broadcastInput } from './signaling.js';
+  import { initVoiceStream, stopVoiceStream } from './voice-webrtc.js';
+
+  function startMultiplayer() {
+    const name = document.getElementById('playerName').value;
+    connectToSignalingServer(name);
+    initVoiceStream();
+  }
+
+  document.getElementById('voiceToggle').addEventListener('change', (e) => {
+    if (e.target.value === 'on' || e.target.value === 'unmute') {
+      initVoiceStream();
+    } else {
+      stopVoiceStream();
+    }
+  });
+</script></head><body><div id='emulatorContainer'>Emulator Area</div><div>
   <label>Player Name: <input type="text" id="playerName" /></label>
   <label>Voice Chat:
     <select id="voiceToggle">
@@ -21,6 +38,23 @@
 
   document.getElementById('voiceToggle').addEventListener('change', (e) => {
     toggleVoiceChat(e.target.value);
+  });
+
+  import { connectToSignalingServer, broadcastInput } from './signaling.js';
+  import { initVoiceStream, stopVoiceStream } from './voice-webrtc.js';
+
+  function startMultiplayer() {
+    const name = document.getElementById('playerName').value;
+    connectToSignalingServer(name);
+    initVoiceStream();
+  }
+
+  document.getElementById('voiceToggle').addEventListener('change', (e) => {
+    if (e.target.value === 'on' || e.target.value === 'unmute') {
+      initVoiceStream();
+    } else {
+      stopVoiceStream();
+    }
   });
 </script>
 </body></html>
