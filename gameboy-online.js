@@ -1,1 +1,1 @@
-// Game Boy Emulator
+// gameboy-online.js placeholder

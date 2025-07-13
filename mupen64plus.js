@@ -1,1 +1,1 @@
-// N64 Engine Runtime (placeholder)
+// mupen64plus.js placeholder

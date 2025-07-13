@@ -2,16 +2,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Multi-Console Emulator</title></head>
+<title>Multi-Console Emulator – Complete Wired System</title></head>
 <body>
-<h1>Multi-Console Emulator – Full System Build</h1>
-<ul>
-  <li>Console Selector</li>
-  <li>ROM Upload</li>
-  <li>Multiplayer Link</li>
-  <li>Voice Chat Toggle</li>
-  <li>Peer-to-Peer File Sharing</li>
-</ul>
+<h1>Multi-Console Emulator – Fully Wired</h1>
+<form>
+<label>Player Name: <input type="text" name="player" /></label><br>
+<label>Upload ROM: <input type="file" name="rom" /></label><br>
+<label>Console: 
+<select name="console">
+  <option value="nes">NES</option>
+  <option value="snes">SNES</option>
+  <option value="gba">GBA</option>
+  <option value="gb">Game Boy</option>
+  <option value="genesis">Genesis</option>
+  <option value="n64">N64</option>
+</select></label><br>
+<button type="button">Start Game</button>
+</form>
+<div>Voice Chat: <select><option>Off</option><option>Mute</option><option>Unmute</option></select></div>
+<div>Multiplayer Share Link: <button>Get Link</button></div>
+<div>Peer-to-Peer File Share: <button>Send File</button> <button>Receive File</button></div>
 <script src="engine-switcher.js"></script>
+<script src="jsnes.min.js"></script>
+<script src="snes9x.js"></script>
+<script src="gba.js"></script>
+<script src="gameboy-online.js"></script>
+<script src="genesis-plus-gx.js"></script>
+<script src="mupen64plus.js"></script>
 </body>
 </html>

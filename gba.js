@@ -1,1 +1,1 @@
-// GBA Engine Runtime (placeholder)
+// gba.js placeholder
