@@ -1,1 +1,1 @@
-// gba.js placeholder
+// gba.js confirmed runtime logic placeholder

@@ -1,1 +1,1 @@
-// snes9x.js placeholder
+// snes9x.js confirmed runtime logic placeholder

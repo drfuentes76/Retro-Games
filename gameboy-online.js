@@ -1,1 +1,1 @@
-// gameboy-online.js placeholder
+// gameboy-online.js confirmed runtime logic placeholder

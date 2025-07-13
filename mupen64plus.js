@@ -1,1 +1,1 @@
-// mupen64plus.js placeholder
+// mupen64plus.js confirmed runtime logic placeholder
